@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id          Int      @id @default(autoincrement())
+  fullName    String
+  title       String
+  location    String
+  citizenship String
+  email       String
+  phone       String
+  telegram    String
+  englishLevel String
+  summary     String   @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  skills      Skill[]
+  experiences Experience[]
+}
+
+model Skill {
+  id        Int      @id @default(autoincrement())
+  name      String
+  category  String // e.g. "core", "infrastructure", "tooling"
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  profileId Int
+
+  @@unique([profileId, name])
+}
+
+model Experience {
+  id           Int       @id @default(autoincrement())
+  company      String
+  role         String
+  location     String
+  startDate    DateTime
+  endDate      DateTime?
+  description  String    @db.Text
+  achievements String[]
+  stack        String[]
+  profile      Profile   @relation(fields: [profileId], references: [id])
+  profileId    Int
+  order        Int       @default(0)
+}
