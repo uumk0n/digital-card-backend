@@ -30,11 +30,7 @@ docker compose up --build
 ```
 
 Serves at `http://localhost:4000/graphql`. On container start it runs
-`prisma migrate deploy` automatically; run the seed once separately:
-
-```bash
-docker compose exec api npm run prisma:seed
-```
+`prisma migrate deploy` and `prisma:seed` automatically.
 
 ## Run without Docker
 
