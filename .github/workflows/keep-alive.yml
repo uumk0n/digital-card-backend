@@ -2,7 +2,7 @@ name: Keep Render alive
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping health endpoint
-        run: curl -sf https://your-app.onrender.com/health
+        run: curl -sf https://digital-card-backend-w4h4.onrender.com/health
